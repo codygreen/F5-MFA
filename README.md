@@ -14,13 +14,12 @@ Note: If you want to keep things simple then using the following naming conventi
 
    ```set ilx_handle [ILX::init "plugin_name" "extension_name"]```
 1. You'll need to update the YubiCloud ClientID and SecretKey in index.js if you're using the YubiCloud verification server.
-```
+   ```
 // Change clientID and secret to your YubiCloud information
 var clientID = ""
 var secretKey = ""
 ```
 1. SSH into your BIG-IP and nstall the node modules
-
    ```
 cd /var/ilx/workspaces/Common/f5_mfa/extensions/f5_mfa_extension/
 npm install node-rest-client qr-image speakeasy yub --save
