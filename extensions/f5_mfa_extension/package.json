@@ -1,0 +1,19 @@
+{
+  "BIG-IP-comments": [
+    "package.json is the standard npm (www.npmjs.org) package definition file.",
+    "For more information please see www.npmjs.org/doc/package.json.html. "
+  ],
+  "description": "A custom iRulesLX extension for BIG-IP",
+  "private": true,
+  "repository": {},
+  "engines": {
+    "node": "0.11.12"
+  },
+  "dependencies": {
+    "f5-nodejs": "0.0.3",
+    "node-rest-client": "^1.8.0",
+    "qr-image": "^3.1.0",
+    "speakeasy": "^2.0.0",
+    "yub": "^0.10.12"
+  }
+}
