@@ -23,8 +23,9 @@ var secretKey = ""
 1. SSH into your BIG-IP and nstall the node modules
    ```
 cd /var/ilx/workspaces/Common/f5_mfa/extensions/f5_mfa_extension/
+
 npm install node-rest-client qr-image speakeasy yub --save
-```
+   ```
 5. Add the iRule to you APM Virtual Server
 
 
