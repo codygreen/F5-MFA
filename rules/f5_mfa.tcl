@@ -55,19 +55,13 @@ when ACCESS_POLICY_AGENT_EVENT {
             # if this is a Yubikey user we'll need to set the secret
             if {([string length $token] > 6) && ([ACCESS::session data get session.custom.is_enrolled] == 0) } {                
                 set secret [string range $token 0 end-32]
-log local0. "new yubickey $secret , token: $token"
                 ACCESS::session data set session.custom.secret $secret
             } else {
                 set secret [ACCESS::session data get session.custom.secret]
             }
 
-
-            
-            
-
             if {$secret eq "" || $token eq ""} {
                 log local0.error "cannot verify token, either secret or token is null"
-log local0. "secret: $secret , token: $token"
                 return
             }
             if {[catch {set result [ILX::call $ilx_handle "verifyToken" $secret $token] } result]} {

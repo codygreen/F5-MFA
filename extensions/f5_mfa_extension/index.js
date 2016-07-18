@@ -9,6 +9,12 @@ var ga = require('./google_authenticator');
 var User = require('./f5_user').User;
 var yubikey = require('./yubikey');
 
+
+// Change clientID and secret to your YubiCloud information
+var clientID = ""
+var secretKey = ""
+
+
 /* Create a new rpc server for listening to TCL iRule calls. */
 var ilx = new f5.ILXServer();
 
@@ -61,8 +67,7 @@ ilx.addMethod('verifyToken', function(req, res) {
   // determine if it's Google Authenticator or Yubico
   if (req.params()[1].length > 6) {
     // verify yubikey otp
-    yubikey.verify(req.params()[1], function(verify) {
-console.log(verify);      
+    yubikey.verify(clientID, secretKey, req.params()[1], function(verify) {     
       if(verify !== true) {
         console.log('ERROR: unable to validate token for indetifier ', req.params()[0]);
         console.log('ERROR: ', verify);
