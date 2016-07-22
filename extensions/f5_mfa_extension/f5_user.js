@@ -2,7 +2,7 @@ var dg = require('./f5_data_group');
 
 exports.User = function(name) {
 	var self = this;
-	
+
 	self.name = name;
 	self.enrolled = false;
 	self.secret = "";
@@ -16,7 +16,7 @@ exports.User = function(name) {
 	* @return {String} secret
 	*/
 	this.getSecret = function(callback) {
-		dg.getData(self.name, function (secret) {
+		dg.get(self.name, function (secret) {
 			if(typeof secret === 'undefined') {
 				console.error('user not found, no secret returned');
 				callback(undefined);
@@ -26,7 +26,7 @@ exports.User = function(name) {
 			this.enrolled = true;
 			callback(secret);
 		});
-		
+
 	};
 
 	/**
@@ -48,4 +48,3 @@ exports.User = function(name) {
 	};
 
 };
-

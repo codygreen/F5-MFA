@@ -1,6 +1,6 @@
 var iControl = require('icontrol');
 
-// set API connection and authentication 
+// set API connection and authentication
 var bigip = new iControl({
   host: '127.0.0.1',
   proto: 'https',
@@ -16,34 +16,13 @@ var exports = module.exports = {};
 //ignore self signed certificate
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-
-/**
- * handle API GET requets
- *
- * @param {String} url
- * @param {Ojbect} args
- * @param {Function} callback
- */
-exports.get = function(url, args, callback) {
-  var client = new Client(options_auth);
-  client.get(url, args, function(data, response) {
-      callback(data);
-  }).on('error', function (err) {
-    console.log('something went wrong on the request', err.request.options);
-  });
-
-  client.on('error', function (err) {
-      console.error('Something went wrong on the client', err);
-  });
-};
-
 /**
  * search through data group for key
  *
  * @param {String} key
  * @return {String} data
  */
-exports.getData = function(key, callback) {
+exports.get = function(key, callback) {
   exports.getDataGroup(function(data) {
     if(typeof data === undefined) {
       console.error("no data group returned");
@@ -103,27 +82,13 @@ exports.put = function (key, data, callback) {
       } else {
         res.records = [{"name": key, "data": data}];
       }
-      // populate the arguments for the http post 
-      args = {  
+      // populate the arguments for the http post
+      args = {
         data: { records: res.records },
         header: { "Content-Type": "application/json" }
       };
-      exports.putRequest(getURI, args, function (r) {
-        callback(r);
+      bigip.modify('/ltm/data-group/internal/~Common~token_keys', args, function(err, res) {
+        callback(data);
       });
     });
 };
- 
-/**
- * send PUT request to data group API
- *
- * @param {String} url
- * @param {Array} args
- * @param {Function} callback
- */ 
-exports.putRequest = function(url, args, callback) {
-  bigip.modify('/ltm/data-group/internal/~Common~token_keys', args, function(err, res) {
-    callback(data);
-  });
-};
-
