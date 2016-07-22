@@ -11,6 +11,8 @@ var bigip = new iControl({
   debug: 'true'
 });
 
+var dgPath = '/ltm/data-group/internal/~Common~token_keys';
+
 var exports = module.exports = {};
 
 //ignore self signed certificate
@@ -47,7 +49,7 @@ exports.get = function(key, callback) {
  * @param {Function} callback
  */
 exports.getDataGroup = function(callback) {
-  bigip.list('/ltm/data-group/internal/~Common~token_keys', function(err, res) {
+  bigip.list(dgPath, function(err, res) {
     callback(res);
   });
 
@@ -87,7 +89,7 @@ exports.put = function (key, data, callback) {
         data: { records: res.records },
         header: { "Content-Type": "application/json" }
       };
-      bigip.modify('/ltm/data-group/internal/~Common~token_keys', args, function(err, res) {
+      bigip.modify(dgPath, args, function(err, res) {
         callback(data);
       });
     });
