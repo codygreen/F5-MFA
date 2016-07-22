@@ -26,8 +26,9 @@ cd /var/ilx/workspaces/Common/f5_mfa/extensions/f5_mfa_extension/
 
 npm install icontrol qr-image speakeasy yub --save
    ```
-5. Add the iRule to you APM Virtual Server
+1. Add the iRule to you APM Virtual Server
 
+1. Create a new data group token_keys
 
 ### ToDo:
   * add documentation on APM profile creation
