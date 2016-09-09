@@ -1,5 +1,5 @@
 #
-# Google Authenticator iRulesLX RPC.
+# MFA iRulesLX RPC.
 #
 
 when HTTP_REQUEST {
@@ -50,7 +50,7 @@ when ACCESS_POLICY_AGENT_EVENT {
             }
         }
         "verify_token" {
-            set ilx_handle [ILX::init "google_auth_plugin" "google_auth_extension"]
+            set ilx_handle [ILX::init "f5_mfa_plugin" "f5_mfa_extension"]
             set token [ACCESS::session data get session.logon.last.token]
             # if this is a Yubikey user we'll need to set the secret
             if {([string length $token] > 6) && ([ACCESS::session data get session.custom.is_enrolled] == 0) } {
