@@ -17,6 +17,7 @@ var exports = module.exports = {};
 
 //ignore self signed certificate
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+bigip.strict = false;
 
 /**
  * search through data group for key
